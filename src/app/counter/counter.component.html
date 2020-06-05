@@ -1,0 +1,25 @@
+<form [formGroup]="form">
+  <!-- <input type="checkbox" formControlName="published"> Published -->
+  <div>
+
+    <h2>ระบบคำนวนการจอง</h2>
+    <button (click)="addCreds()">Add</button>
+
+    <div formArrayName="customer">
+    <div *ngFor="let creds of form.controls.customer?.value; let i = index ;trackBy:trackFn" >
+      <div [formGroupName]="i">
+        <input placeholder="ชื่อผู้จอง" formControlName="username">
+        <input type="number" placeholder="เบอร์โทรศัพท์ติดต่อ" formControlName="tel">
+        <input type="date" placeholder="วันที่จะมาใช้บริการ" formControlName="reservationTime">
+        <input type="time" placeholder="เวลาเข้าร้าน" formControlName="shopTimeIn">
+        <input type="time" placeholder="เวลาเข้าร้าน" formControlName="shopTimeOut">
+        <input type="number" placeholder="จำนวนลูกค้าที่จะมา" formControlName="number">
+      </div>
+    </div>
+    </div>
+    <button (click)="cal()">คำนวน</button>
+    <div *ngFor="let c of customersTable" >
+      <p > คุณ{{c.username}} จะได้ {{c.table | number}} โต๊ะ</p>
+    </div>
+  </div>
+</form>
